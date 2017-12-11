@@ -1,0 +1,13 @@
+.idea
+configurations/Application.*
+configurations/AttributesTable.*
+configurations/Database.*
+configurations/Filter.*
+configurations/Graphics.*
+configurations/Map.*
+configurations/Tables.*
+public/dist
+public/docs
+node_modules
+npm-debug.log
+.vscode

@@ -1,0 +1,64 @@
+{
+  "Countries": {
+    "Schema": "dados_geo",
+    "TableName": "paises",
+    "IdFieldName": "id_0",
+    "NameFieldName": "name_0",
+    "BdqNameFieldName": "nome_bdq",
+    "GeometryFieldName": "geom"
+  },
+  "States": {
+    "Schema": "bdqueimadas",
+    "TableName": "estados",
+    "IdFieldName": "complete_id",
+    "NameFieldName": "name_1",
+    "BdqNameFieldName": "nome_bdq",
+    "GeometryFieldName": "geom"
+  },
+  "Cities": {
+    "Schema": "bdqueimadas",
+    "TableName": "municipios",
+    "IdFieldName": "complete_id",
+    "NameFieldName": "name_2",
+    "BdqNameFieldName": "nome_bdq",
+    "StateIdFieldName": "complete_id_state",
+    "StateNameFieldName": "name_1",
+    "CountryIdFieldName": "id_0",
+    "CountryNameFieldName": "name_0",
+    "GeometryFieldName": "geom"
+  },
+  "Fires": {
+    "Schema": "bdqueimadas",
+    "TableName": "focos",
+    "IdFieldName": "id_foco_bdq",
+    "DateFieldName": "data",
+    "TimeFieldName": "hora",
+    "DateTimeFieldName": "data_hora_gmt",
+    "SatelliteFieldName": "satelite",
+    "CountryFieldName": "pais_complete_id",
+    "StateFieldName": "estado_complete_id",
+    "CityFieldName": "municipio_complete_id",
+    "BiomeFieldName": "bioma",
+    "GeometryFieldName": "geometria",
+    "DateFormat": "YYYY-MM-DD"
+  },
+  "UCF": {
+    "NameFieldName": "nome",
+    "FiresSchema": "public",
+    "FiresTableName": "view_focos_uc",
+    "FiresDateFieldName": "data",
+    "Fires5KMTableName": "view_focos_uc_5",
+    "Fires10KMTableName": "view_focos_uc_10",
+    "Schema": "bdqueimadas",
+    "TableName": "unidades_conservacao_federais_new",
+    "TableName5KM": "buffer_5_unidades_conservacao_federais_new",
+    "TableName10KM": "buffer_10_unidades_conservacao_federais_new",
+    "IdFieldName": "id_ucf",
+    "FiresPAFieldName": "id_uc",
+    "Fires5KMPAFieldName": "id_uc",
+    "Fires10KMPAFieldName": "id_uc",
+    "FiresIdsFieldName": "id_focos_bdq",
+    "IsFederal": "uc_federal",
+    "GeometryFieldName": "geom"
+  }
+}

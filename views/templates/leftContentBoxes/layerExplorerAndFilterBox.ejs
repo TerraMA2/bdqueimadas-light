@@ -1,0 +1,134 @@
+<div class="left-content-box" id="layer-explorer-and-filter-box">
+  <div class="form-group bdqueimadas-form float-left">
+    <label for="countries"><%= __('Países') %></label>
+    <select multiple id="countries" name="countries" class="form-control" style="width: 148px;">
+      <option value="" selected><%= __('Todos os Países') %></option>
+      <% countries.rows.forEach(function(country, index) { %>
+        <option value="<%- country.id %>"><%- country.name %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="form-group bdqueimadas-form float-right">
+    <label for="states"><%= __('Estados') %></label>
+    <select multiple id="states" name="states" class="form-control" style="width: 148px;"></select>
+  </div>
+  <div style="clear: both; height: 4px;"></div>
+  <div class="form-group bdqueimadas-form">
+    <label for="pas"><%= __('Unidades de Conservação Federais (Apenas Brasil)') %></label>
+    <div class="input-group">
+      <input type="text" id="pas" name="pas" class="form-control" placeholder="<%= __('UCs / TIs (Apenas Brasil)') %>">
+      <span class="input-group-btn">
+        <button type="button" id="search-pas-btn" class="btn btn-flat">
+          <i class="fa fa-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="form-group bdqueimadas-form">
+    <label for="city">Municípios</label>
+    <div class="input-group">
+      <input type="text" id="city" name="city" class="form-control" placeholder="Municípios">
+      <span class="input-group-btn">
+        <button type="button" id="search-cities-btn" class="btn btn-flat">
+          <i class="fa fa-search"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div style="clear: both; height: 5px;"></div>
+  <hr/>
+  <div style="clear: both; height: 5px;"></div>
+  <div class="form-group bdqueimadas-form">
+    <label style="width: 100%; text-align: center; margin-bottom: 4px !important;">Obs: dados após Jun/1998</label>
+    <div style="float: left;">
+      <label for="filter-date-from" style="float: left; margin-right: 4px; margin-top: 5px;"><%= __('Data / Hora Início - TMG (Z)') %></label>
+      <input type="text" style="width: 86px; float: left; padding-left: 5px; padding-right: 5px;" class="form-control date filter-date filter-date-from" id="filter-date-from" placeholder="<%= __('Data Início') %>">
+    </div>
+    <div style="float: right;">
+      <input type="text" style="width: 46px; float: left; padding-left: 5px; padding-right: 5px;" class="form-control time filter-time filter-time-from" id="filter-time-from" placeholder="<%= __('Hora Início') %>" value="00:00">
+    </div>
+  </div>
+  <div style="clear: both; height: 4px;"></div>
+  <div class="form-group bdqueimadas-form">
+    <div style="float: left;">
+      <label for="filter-date-to" style="float: left; margin-right: 14px; margin-top: 5px;"><%= __('Data / Hora Fim - TMG (Z)') %></label>
+      <input type="text" style="width: 86px; float: left; padding-left: 5px; padding-right: 5px;" class="form-control date filter-date filter-date-to" id="filter-date-to" placeholder="<%= __('Data Fim') %>">
+    </div>
+    <div style="float: right;">
+      <input type="text" style="width: 46px; float: left; padding-left: 5px; padding-right: 5px;" class="form-control time filter-time filter-time-to" id="filter-time-to" placeholder="<%= __('Hora Fim') %>" value="23:59">
+    </div>
+  </div>
+  <span class="help-block component-filter-error-main" id="filter-error-dates"></span>
+  <div style="clear: both;"></div>
+  <div class="form-group bdqueimadas-form float-left">
+    <label for="filter-satellite"><%= __('Focos dos Satélites') %></label>
+    <select multiple class="form-control" id="filter-satellite" style="width: 148px;">
+      <%
+      var satelliteOptions = "";
+      var referenceSatellite = "";
+      var isSatelliteSelected = false;
+
+      configurations.filterConfigurations.Satellites.forEach(function(satellite, index) {
+        if(satellite.Current) {
+          if(satellite.ReferenceCurrent) {
+            referenceSatellite += "<option value=\"" + satellite.Id + "\"";
+
+            if(satellite.Selected) {
+              referenceSatellite += " selected>";
+
+              if(!isSatelliteSelected) isSatelliteSelected = true;
+            } else {
+              referenceSatellite += ">";
+            }
+
+            referenceSatellite += "Refer. (" + satellite.Name + ")</option>";
+          } else {
+            satelliteOptions += "<option value=\"" + satellite.Id + "\"";
+
+            if(satellite.Selected) {
+              satelliteOptions += " selected>";
+
+              if(!isSatelliteSelected) isSatelliteSelected = true;
+            } else {
+              satelliteOptions += ">";
+            }
+
+            satelliteOptions += satellite.Name + "</option>";
+          }
+        }
+      })
+      %>
+
+      <option value="all"<%- (!isSatelliteSelected) ? " selected" : ""%>><%= __('TODOS') %></option>
+      <%- referenceSatellite + satelliteOptions %>
+    </select>
+  </div>
+  <div class="form-group bdqueimadas-form float-right">
+    <label for="filter-biome"><%= __('Focos nos Biomas') %></label>
+    <select multiple class="form-control" id="filter-biome" style="width: 148px;">
+      <option value="all" selected><%= __('TODOS') %></option>
+      <option value="Amaz&ocirc;nia">Amaz&ocirc;nia</option>
+      <option value="Caatinga">Caatinga</option>
+      <option value="Cerrado">Cerrado</option>
+      <option value="Mata Atl&acirc;ntica">Mata Atl&acirc;ntica</option>
+      <option value="Pampa">Pampa</option>
+      <option value="Pantanal">Pantanal</option>
+    </select>
+  </div>
+  <div style="clear: both; height: 5px;"></div>
+  <span class="help-block component-filter-error-main" id="filter-error-main"></span>
+  <div style="clear: both; height: 5px;"></div>
+  <button class="btn btn-primary" id="filter-button"><%= __('Aplicar') %></button>
+  <button class="btn btn-primary" id="initial-filter-button"><%= __('Mapa Inicial') %></button>
+  <div style="clear: both; height: 5px;"></div>
+  <hr/>
+  <h4 class="layer-explorer-and-filters-title"<%- configurations.mapConfigurations.EnableAddAndRemoveLayers ? '' : ' style="padding: 0px !important;"' %>>
+    <%= __('Camadas (mova a camada p/ cima se ela não aparecer)') %>
+    <%
+      if(configurations.mapConfigurations.EnableAddAndRemoveLayers) {
+        %> <i class="fa fa-fw fa-plus" id="add-layer"></i><%
+      }
+    %>
+  </h4>
+  <div id="terrama2-layerexplorer" style="max-height: 350px;overflow: auto;"></div>
+</div>

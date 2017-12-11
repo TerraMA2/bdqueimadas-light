@@ -1,0 +1,9 @@
+{
+  "Port": 5432,
+  "Host": "127.0.0.1",
+  "Database": "test",
+  "User": "postgres",
+  "Password": "postgres",
+  "MaxNumberOfClientsInThePool": 30,
+  "IdleTimeoutMillis": 30000
+}
