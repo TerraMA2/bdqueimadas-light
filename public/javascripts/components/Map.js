@@ -371,15 +371,19 @@ define(
 
     /**
      * Sets the map to its initial extent.
+     * @param {boolean} applyFilter - Flag that indicates if the filter should be applied
      *
      * @function initialExtent
      * @memberof Map
      * @inner
      */
-    var initialExtent = function() {
+    var initialExtent = function(applyFilter) {
       TerraMA2WebComponents.MapDisplay.zoomToExtent(Utils.getConfigurations().applicationConfigurations.ContinentExtent);
-      $.event.trigger({type: "applyFilter"});
-      $.event.trigger({type: "updateComponents"});
+
+      if(applyFilter) {
+        $.event.trigger({type: "applyFilter"});
+        $.event.trigger({type: "updateComponents"});
+      }
     };
 
     /**

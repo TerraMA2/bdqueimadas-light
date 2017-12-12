@@ -612,7 +612,7 @@ define(
 
       $('#initial-filter-button').on('click', function() {
         Map.resetMapMouseTools();
-        Map.initialExtent();
+        Map.initialExtent(false);
         Map.activateMoveMapTool();
         Filter.resetDropdowns();
 
@@ -956,7 +956,7 @@ define(
 
       $('#initialExtent').on('click', function() {
         Map.resetMapMouseTools();
-        Map.initialExtent();
+        Map.initialExtent(true);
         Map.activateMoveMapTool();
         Filter.resetDropdowns();
       });
@@ -1457,7 +1457,8 @@ define(
               firesAttributes += "<br/><strong>Data / Hora:</strong> " + Utils.dateTimeToString(Utils.stringToDateTime(featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.DateTimeFieldName].toString().replace('T', ' ').replace('Z', ''), Utils.getConfigurations().filterConfigurations.LayerToFilter.DateTimeFormat), "YYYY/MM/DD HH:II:SS");
               firesAttributes += "<br/><strong>Satélite:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.SatelliteFieldName];
               firesAttributes += "<br/><strong>Município:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.CityNameFieldName];
-              firesAttributes += "<br/><strong>Estado / País:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.StateNameFieldName] + ' / ' + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.CountryNameFieldName];
+              firesAttributes += "<br/><strong>Estado:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.StateNameFieldName];
+              firesAttributes += "<br/><strong>País:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.CountryNameFieldName];
               firesAttributes += "<br/><strong>Bioma:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.BiomeFieldName];
               if(featuresLength > (i + 1)) firesAttributes += "<hr/>";
             }

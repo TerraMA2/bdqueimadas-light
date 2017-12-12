@@ -866,19 +866,20 @@ define(
      * @inner
      */
     var resetDropdowns = function() {
+      clearStates();
+      clearCountries();
+
       disableDropdown('states', '');
       $('#states').empty();
+      enableDropdown('countries', '');
 
       disableDropdown('states-graphics', '');
       $('#states-graphics').empty();
+      enableDropdown('countries-graphics', '');
 
       disableDropdown('states-attributes-table', '');
       $('#states-attributes-table').empty();
-
-      clearStates();
-
-      enableDropdown('countries', '');
-      $('#countries').change();
+      enableDropdown('countries-attributes-table', '');
     };
 
     /**
