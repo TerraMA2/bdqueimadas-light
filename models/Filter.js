@@ -79,11 +79,34 @@ var Filter = function() {
     // Connection with the PostgreSQL database
     memberPgPool.connect(function(err, client, done) {
       if(!err) {
-        var parameter = 1;
-        var params = [];
-
         // Creation of the query
         var query = "select " + memberTablesConfig.Countries.IdFieldName + " as id, " + memberTablesConfig.Countries.NameFieldName + " as name from " + memberTablesConfig.Countries.Schema + "." + memberTablesConfig.Countries.TableName + " order by " + memberTablesConfig.Countries.NameFieldName + " asc;";
+
+        // Execution of the query
+        client.query(query, function(err, result) {
+          done();
+          if(!err) return callback(null, result);
+          else return callback(err);
+        });
+      } else return callback(err);
+    });
+  };
+
+  /**
+   * Returns a list of biomes.
+   * @param {function} callback - Callback function
+   * @returns {function} callback - Execution of the callback function, which will process the received data
+   *
+   * @function getBiomes
+   * @memberof Filter
+   * @inner
+   */
+  this.getBiomes = function(callback) {
+    // Connection with the PostgreSQL database
+    memberPgPool.connect(function(err, client, done) {
+      if(!err) {
+        // Creation of the query
+        var query = "select " + memberTablesConfig.Biomes.IdFieldName + " as id, " + memberTablesConfig.Biomes.NameFieldName + " as name from " + memberTablesConfig.Biomes.Schema + "." + memberTablesConfig.Biomes.TableName + " order by " + memberTablesConfig.Biomes.NameFieldName + " asc;";
 
         // Execution of the query
         client.query(query, function(err, result) {
@@ -279,7 +302,6 @@ var Filter = function() {
   /**
    * Returns the extent of the protected area corresponding to the received id.
    * @param {integer} id - Id of the protected area
-   * @param {string} type - Type of the protected area (TI, UCE or UCF)
    * @param {function} callback - Callback function
    * @returns {function} callback - Execution of the callback function, which will process the received data
    *
@@ -287,9 +309,9 @@ var Filter = function() {
    * @memberof Filter
    * @inner
    */
-  this.getProtectedAreaExtent = function(id, type, callback) {
-    if(memberFilterConfig.Extents.ProtectedAreas[type][id.toString()] !== undefined) {
-      var confExtent = memberFilterConfig.Extents.ProtectedAreas[type][id.toString()].split(',');
+  this.getProtectedAreaExtent = function(id, callback) {
+    if(memberFilterConfig.Extents.ProtectedAreas[id.toString()] !== undefined) {
+      var confExtent = memberFilterConfig.Extents.ProtectedAreas[id.toString()].split(',');
       return callback(null, { rowCount: 1, rows: [{ extent: "BOX(" + confExtent[0] + " " + confExtent[1] + "," + confExtent[2] + " " + confExtent[3] + ")" }] });
     }
 
@@ -388,90 +410,6 @@ var Filter = function() {
   };
 
   /**
-   * Returns the BDQ names of the received countries ids.
-   * @param {array} countries - Countries ids
-   * @param {function} callback - Callback function
-   * @returns {function} callback - Execution of the callback function, which will process the received data
-   *
-   * @function getCountriesBdqNames
-   * @memberof Filter
-   * @inner
-   */
-  this.getCountriesBdqNames = function(countries, callback) {
-    // Connection with the PostgreSQL database
-    memberPgPool.connect(function(err, client, done) {
-      if(!err) {
-        var parameter = 1;
-        var params = [];
-
-        // Creation of the query
-        var query = "select " + memberTablesConfig.Countries.BdqNameFieldName + " as name from " + memberTablesConfig.Countries.Schema + "." +
-                    memberTablesConfig.Countries.TableName + " where " + memberTablesConfig.Countries.IdFieldName + " in (";
-
-        for(var i = 0, countriesLength = countries.length; i < countriesLength; i++) {
-          query += "$" + (parameter++) + ",";
-          params.push(countries[i]);
-        }
-
-        if(countries.length > 0) {
-          query = query.substring(0, (query.length - 1)) + ") order by " + memberTablesConfig.Countries.BdqNameFieldName + " asc;";
-        } else {
-          query += "'0') order by " + memberTablesConfig.Countries.BdqNameFieldName + " asc;";
-        }
-
-        // Execution of the query
-        client.query(query, params, function(err, result) {
-          done();
-          if(!err) return callback(null, result);
-          else return callback(err);
-        });
-      } else return callback(err);
-    });
-  };
-
-  /**
-   * Returns the BDQ names of the received states ids.
-   * @param {array} states - States ids
-   * @param {function} callback - Callback function
-   * @returns {function} callback - Execution of the callback function, which will process the received data
-   *
-   * @function getStatesBdqNames
-   * @memberof Filter
-   * @inner
-   */
-  this.getStatesBdqNames = function(states, callback) {
-    // Connection with the PostgreSQL database
-    memberPgPool.connect(function(err, client, done) {
-      if(!err) {
-        var parameter = 1;
-        var params = [];
-
-        // Creation of the query
-        var query = "select " + memberTablesConfig.States.NameFieldName + " as name from " + memberTablesConfig.States.Schema + "." +
-                    memberTablesConfig.States.TableName + " where " + memberTablesConfig.States.IdFieldName + " in (";
-
-        for(var i = 0, statesLength = states.length; i < statesLength; i++) {
-          query += "$" + (parameter++) + ",";
-          params.push(states[i]);
-        }
-
-        if(states.length > 0) {
-          query = query.substring(0, (query.length - 1)) + ") order by " + memberTablesConfig.States.NameFieldName + " asc;";
-        } else {
-          query += "'0') order by " + memberTablesConfig.States.NameFieldName + " asc;";
-        }
-
-        // Execution of the query
-        client.query(query, params, function(err, result) {
-          done();
-          if(!err) return callback(null, result);
-          else return callback(err);
-        });
-      } else return callback(err);
-    });
-  };
-
-  /**
    * Returns the satellites for the given filter.
    * @param {string} dateTimeFrom - Initial date / time
    * @param {string} dateTimeTo - Final date / time
@@ -514,7 +452,6 @@ var Filter = function() {
   /**
    * Returns the protected areas that match the given value.
    * @param {string} value - Value to be used in the search of protected areas
-   * @param {object} searchFor - Flags that indicates in which tables the search should be performed. Format: { 'UCE': true/false, 'UCF': true/false, 'TI': true/false }
    * @param {function} callback - Callback function
    * @returns {function} callback - Execution of the callback function, which will process the received data
    *
@@ -522,22 +459,14 @@ var Filter = function() {
    * @memberof Filter
    * @inner
    */
-  this.searchForPAs = function(value, searchFor, callback) {
+  this.searchForPAs = function(value, callback) {
     // Connection with the PostgreSQL database
     memberPgPool.connect(function(err, client, done) {
       if(!err) {
-        var parameters = [];
-
-        var ucfQuery = "select " + memberTablesConfig.UCF.IdFieldName + " as id, upper(" + memberTablesConfig.UCF.NameFieldName + ") as name, 'UCF' as type " +
+        var parameters = ['%' + value + '%'];
+        var query = "select " + memberTablesConfig.UCF.IdFieldName + " as id, upper(" + memberTablesConfig.UCF.NameFieldName + ") as name " +
         "from " + memberTablesConfig.UCF.Schema + "." + memberTablesConfig.UCF.TableName +
-        " where unaccent(upper(" + memberTablesConfig.UCF.NameFieldName + ")) like unaccent(upper(_SEARCH_))";
-
-        var query = "";
-
-        if(searchFor.UCF) {
-          parameters.push('%' + value + '%');
-          query += (parameters.length > 1 ? ' union ' : '') + ucfQuery.replace('_SEARCH_', '$' + parameters.length);
-        }
+        " where unaccent(upper(" + memberTablesConfig.UCF.NameFieldName + ")) like unaccent(upper($1))";
 
         // Execution of the query
         client.query(query, parameters, function(err, result) {
@@ -602,42 +531,6 @@ var Filter = function() {
 
         // Execution of the query
         client.query(query, parameters, function(err, result) {
-          done();
-          if(!err) return callback(null, result);
-          else return callback(err);
-        });
-      } else return callback(err);
-    });
-  };
-
-  /**
-   * Returns the names of the country, state and city for the given cities ids.
-   * @param {array} ids - Cities ids
-   * @param {function} callback - Callback function
-   * @returns {function} callback - Execution of the callback function, which will process the received data
-   *
-   * @function getCountryStateAndCityNamesByCities
-   * @memberof Filter
-   * @inner
-   */
-  this.getCountryStateAndCityNamesByCities = function(ids, callback) {
-    // Connection with the PostgreSQL database
-    memberPgPool.connect(function(err, client, done) {
-      if(!err) {
-
-        // Creation of the query
-        var query = "select name_0 as country, name_1 as state, name_2 as city from " + memberTablesConfig.Cities.Schema + "." + memberTablesConfig.Cities.TableName + " where " + memberTablesConfig.Cities.IdFieldName + " in (",
-            params = [];
-
-        for(var i = 0, idsLength = ids.length; i < idsLength; i++) {
-          query += "$" + (i + 1) + ",";
-          params.push(ids[i]);
-        }
-
-        query = query.substring(0, (query.length - 1)) + ") order by position(" + memberTablesConfig.Cities.IdFieldName + " in '" + ids.toString() + "');";
-
-        // Execution of the query
-        client.query(query, params, function(err, result) {
           done();
           if(!err) return callback(null, result);
           else return callback(err);

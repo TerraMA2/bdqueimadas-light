@@ -28,10 +28,10 @@ var Filter = function(io) {
           client.emit('spatialFilterResponse', { key: json.key, ids: json.ids, extent: extent });
         });
       } else if(json.key === 'ProtectedArea') {
-        memberFilter.getProtectedAreaExtent(json.id, json.type, function(err, extent) {
+        memberFilter.getProtectedAreaExtent(json.id, function(err, extent) {
           if(err) return console.error(err);
 
-          client.emit('spatialFilterResponse', { key: json.key, id: json.id, type: json.type, extent: extent });
+          client.emit('spatialFilterResponse', { key: json.key, id: json.id, extent: extent });
         });
       } else if(json.key === 'City') {
         memberFilter.getCityExtent(json.id, function(err, extent) {

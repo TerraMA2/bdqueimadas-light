@@ -59,7 +59,7 @@ var Utils = function() {
     // If the 'options.biomes' parameter exists, a biomes 'where' clause is created
     if(options.biomes !== undefined) {
       var biomesArray = options.biomes.split(',');
-      query += " and (" + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.BiomeFieldName + " in (";
+      query += " and (" + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.BiomeIdFieldName + " in (";
 
       for(var i = 0, biomesArrayLength = biomesArray.length; i < biomesArrayLength; i++) {
         if(options.pgFormatQuery !== undefined) query += "%L,";
@@ -67,12 +67,7 @@ var Utils = function() {
         params.push(biomesArray[i]);
       }
 
-      query = query.substring(0, (query.length - 1)) + ")";
-
-      if(options.industrialFires !== undefined && (options.industrialFires == "true" || options.industrialFires))
-        query += " or " + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.IndustrialFiresTypeFieldName + " = 2";
-
-      query += ")";
+      query = query.substring(0, (query.length - 1)) + "))";
     }
 
     // If the 'options.countries' parameter exists, a countries 'where' clause is created
@@ -87,35 +82,23 @@ var Utils = function() {
         params.push(countriesArray[i]);
       }
 
-      query = query.substring(0, (query.length - 1)) + ")";
-
-      if(options.industrialFires !== undefined && (options.industrialFires == "true" || options.industrialFires))
-        query += " or " + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.IndustrialFiresTypeFieldName + " = 2";
-
-      query += ")";
+      query = query.substring(0, (query.length - 1)) + "))";
     }
 
     var filterStates = (options.states !== undefined && (filterRules === undefined || filterRules === null || filterRules.ignoreStateFilter === undefined || !filterRules.ignoreStateFilter));
 
     // If the 'options.states' parameter exists, a states 'where' clause is created
     if(filterStates) {
-      if(filterStates) {
-        var statesArray = options.states.split(',');
-        query += " and (" + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.StateFieldName + " in (";
+      var statesArray = options.states.split(',');
+      query += " and (" + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.StateFieldName + " in (";
 
-        for(var i = 0, statesArrayLength = statesArray.length; i < statesArrayLength; i++) {
-          if(options.pgFormatQuery !== undefined) query += "%L,";
-          else query += "$" + (parameter++) + ",";
-          params.push(statesArray[i]);
-        }
-
-        query = query.substring(0, (query.length - 1)) + ")";
+      for(var i = 0, statesArrayLength = statesArray.length; i < statesArrayLength; i++) {
+        if(options.pgFormatQuery !== undefined) query += "%L,";
+        else query += "$" + (parameter++) + ",";
+        params.push(statesArray[i]);
       }
 
-      if(options.industrialFires !== undefined && (options.industrialFires == "true" || options.industrialFires))
-        query += " or " + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.IndustrialFiresTypeFieldName + " = 2";
-
-      query += ")";
+      query = query.substring(0, (query.length - 1)) + "))";
     }
 
     // If the 'options.cities' parameter exists, a cities 'where' clause is created
@@ -129,12 +112,7 @@ var Utils = function() {
         params.push(citiesArray[i]);
       }
 
-      query = query.substring(0, (query.length - 1)) + ")";
-
-      if(options.industrialFires !== undefined && (options.industrialFires == "true" || options.industrialFires))
-        query += " or " + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.IndustrialFiresTypeFieldName + " = 2";
-
-      query += ")";
+      query = query.substring(0, (query.length - 1)) + "))";
     }
 
     // If the 'options.extent' parameter exists, a extent 'where' clause is created
@@ -142,32 +120,6 @@ var Utils = function() {
       if(options.pgFormatQuery !== undefined) query += " and ST_Intersects(" + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.GeometryFieldName + ", ST_MakeEnvelope(%L, %L, %L, %L, 4326))";
       else query += " and ST_Intersects(" + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.GeometryFieldName + ", ST_MakeEnvelope($" + (parameter++) + ", $" + (parameter++) + ", $" + (parameter++) + ", $" + (parameter++) + ", 4326))";
       params.push(options.extent[0], options.extent[1], options.extent[2], options.extent[3]);
-    }
-
-    // If the 'options.risk' parameter exists, a risk 'where' clause is created
-    if(options.risk !== undefined) {
-      query += " and " + (options.tableAlias !== undefined ? options.tableAlias + "." : "") + memberTablesConfig.Fires.RiskFieldName;
-
-      switch(options.risk) {
-        case 'minimum':
-          query +=  " between 0 and 0.15";
-          break;
-        case 'low':
-          query += " between 0.15 and 0.4";
-          break;
-        case 'medium':
-          query += " between 0.4 and 0.7";
-          break;
-        case 'high':
-          query += " between 0.7 and 0.95";
-          break;
-        case 'critic':
-          query += " > 0.95";
-          break;
-        default:
-          query += " > 0";
-          break;
-      }
     }
 
     return {

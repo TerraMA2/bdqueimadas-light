@@ -28,7 +28,6 @@ var Graphics = function(io) {
       // Verifications of the 'options' object items
       if(json.satellites !== '') options.satellites = json.satellites;
       if(json.biomes !== '') options.biomes = json.biomes;
-      if(json.risk !== '') options.risk = json.risk;
       if(json.countries !== null && json.countries !== '') options.countries = json.countries;
       if(json.states !== null && json.states !== '') options.states = json.states;
       if(json.cities !== null && json.cities !== '') options.cities = json.cities;

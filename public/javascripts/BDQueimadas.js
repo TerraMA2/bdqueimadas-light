@@ -94,6 +94,11 @@ define(
           $('#message-div').addClass('hidden');
       });
 
+      $("#close-bottom-credit-div").on('click', function() {
+        if(!$('#credit-box').hasClass('hidden'))
+          $('#credit-box').addClass('hidden');
+      });
+
       // Sidebar buttons click event
       $(".sidebar-menu > li.left-box").on('click', function(event) {
         event.preventDefault();
@@ -700,8 +705,7 @@ define(
 
               $('#pas-export').data('value', JSON.stringify({
                 id: data[0].value.id,
-                name: data[0].value.name,
-                type: data[0].value.type
+                name: data[0].value.name
               }));
             } else {
               $('#pas-export').data('value', '');
@@ -1183,28 +1187,12 @@ define(
 
       // Navbar logos events
 
-      $("#page-title").on('click', '.inpe-image', function() {
+      $("#page-second-title").on('click', '.inpe-image', function() {
         window.open('http://www.inpe.br/', '_blank');
       });
 
-      $("#page-title").on('click', '.programa-queimadas-image', function() {
+      $("#page-second-title").on('click', '.programa-queimadas-image', function() {
         window.open('http://www.inpe.br/queimadas/', '_blank');
-      });
-
-      $("#page-title").on('click', '.defra-image', function() {
-        window.open('https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs', '_blank');
-      });
-
-      $("#page-title").on('click', '.banco-mundial-image', function() {
-        window.open('http://www.worldbank.org/', '_blank');
-      });
-
-      $("#page-title").on('click', '.mma-image', function() {
-        window.open('http://www.mma.gov.br/', '_blank');
-      });
-
-      $("#page-title").on('click', '.funcate-image', function() {
-        window.open('https://www.funcate.org.br/', '_blank');
       });
 
       // TerraMA2WebComponents events
@@ -1470,9 +1458,7 @@ define(
               firesAttributes += "<br/><strong>Satélite:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.SatelliteFieldName];
               firesAttributes += "<br/><strong>Município:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.CityNameFieldName];
               firesAttributes += "<br/><strong>Estado / País:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.StateNameFieldName] + ' / ' + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.CountryNameFieldName];
-              firesAttributes += "<br/><strong>Precipitação 24h:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.PrecipitationFieldName];
-              firesAttributes += "<br/><strong>Nº dias sem precipitação:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.NumberOfDaysWithoutPrecipitationFieldName];
-              firesAttributes += "<br/><strong>Bioma:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.RiskFieldName] + ' / ' + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.BiomeFieldName];
+              firesAttributes += "<br/><strong>Bioma:</strong> " + featureInfo.features[i].properties[Utils.getConfigurations().filterConfigurations.LayerToFilter.BiomeFieldName];
               if(featuresLength > (i + 1)) firesAttributes += "<hr/>";
             }
 
@@ -1625,18 +1611,16 @@ define(
           clearUCFsLayers();
 
           if(data.length > 0) {
-            if(data[0].value.type === "UCF") {
-              var cqlUCF = Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.IdField + "=" + data[0].value.id;
+            var cqlUCF = Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.IdField + "=" + data[0].value.id;
 
-              if(!$('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').is(":checked"))
-                $('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').click();
+            if(!$('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').is(":checked"))
+              $('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').click();
 
-              Filter.applyCqlFilterToLayer(cqlUCF, Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName);
-            }
+            Filter.applyCqlFilterToLayer(cqlUCF, Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName);
 
             $('#pas').val(data[0].label);
 
-            Utils.getSocket().emit('spatialFilterRequest', { key: 'ProtectedArea', id: data[0].value.id, type: data[0].value.type });
+            Utils.getSocket().emit('spatialFilterRequest', { key: 'ProtectedArea', id: data[0].value.id });
           } else {
             if(showAlerts) {
               vex.dialog.alert({
@@ -1714,9 +1698,9 @@ define(
     };
 
     /**
-     * Returns the countries, states, cities and special regions to be filtered.
+     * Returns the countries, states and cities to be filtered.
      * @param {integer} filter - Parameter that indicates witch filter should be used
-     * @returns {object} return - Countries, states, cities and special regions
+     * @returns {object} return - Countries, states and cities
      *
      * @private
      * @function getSpatialData
@@ -1900,21 +1884,16 @@ define(
 
           clearUCFsLayers();
 
-          if(ui.item.value.type === "UCF") {
-            var cqlUCF = Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.IdField + "=" + ui.item.value.id;
+          var cqlUCF = Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.IdField + "=" + ui.item.value.id;
 
-            if(!$('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').is(":checked"))
-              $('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').click();
+          if(!$('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').is(":checked"))
+            $('#' + Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName.replace(':', '') + ' > input').click();
 
-            Filter.applyCqlFilterToLayer(cqlUCF, Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName);
-
-            console.log(cqlUCF);
-            console.log(Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName);
-          }
+          Filter.applyCqlFilterToLayer(cqlUCF, Utils.getConfigurations().filterConfigurations.ProtectedAreas.UCF.LayerName);
 
           $('#pas').val(ui.item.label);
 
-          Utils.getSocket().emit('spatialFilterRequest', { key: 'ProtectedArea', id: ui.item.value.id, type: ui.item.value.type });
+          Utils.getSocket().emit('spatialFilterRequest', { key: 'ProtectedArea', id: ui.item.value.id });
         }
       });
 

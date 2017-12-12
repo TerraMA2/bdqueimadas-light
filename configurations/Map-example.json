@@ -2,7 +2,7 @@
   "Subtitles": [
     {
       "Id": "fires-subtitles",
-      "LayerId": "bdqueimadas:focos",
+      "LayerId": "bdqueimadas:focos_bdq_light",
       "LayerName": "Camada: Focos",
       "Subtitles": [
         {
@@ -10,7 +10,7 @@
           "SubtitleText": "AQUA-M",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/aqua-m.png",
+          "Image": "images/satellitesIcons/aqua-m.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -19,7 +19,7 @@
           "SubtitleText": "AQUA-MEX",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/aqua-mex.png",
+          "Image": "images/satellitesIcons/aqua-mex.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -28,7 +28,7 @@
           "SubtitleText": "AQUA_M-M",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/aqua-m-m.png",
+          "Image": "images/satellitesIcons/aqua-m-m.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -37,7 +37,7 @@
           "SubtitleText": "AQUA_M-T",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/aqua-m-t.png",
+          "Image": "images/satellitesIcons/aqua-m-t.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -46,7 +46,7 @@
           "SubtitleText": "AQUA-T",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/aqua-t.png",
+          "Image": "images/satellitesIcons/aqua-t.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -55,7 +55,7 @@
           "SubtitleText": "ATSR",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/atsr.png",
+          "Image": "images/satellitesIcons/atsr.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -64,7 +64,7 @@
           "SubtitleText": "GOES-08",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/goes-08.png",
+          "Image": "images/satellitesIcons/goes-08.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -73,7 +73,7 @@
           "SubtitleText": "GOES-10",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/goes-10.png",
+          "Image": "images/satellitesIcons/goes-10.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -82,7 +82,7 @@
           "SubtitleText": "GOES-12",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/goes-12.png",
+          "Image": "images/satellitesIcons/goes-12.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -91,7 +91,7 @@
           "SubtitleText": "GOES-13",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/goes-13.png",
+          "Image": "images/satellitesIcons/goes-13.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -100,7 +100,7 @@
           "SubtitleText": "GOES-16",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/goes-16.png",
+          "Image": "images/satellitesIcons/goes-16.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -109,7 +109,7 @@
           "SubtitleText": "MSG-02",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/msg-02.png",
+          "Image": "images/satellitesIcons/msg-02.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -118,7 +118,7 @@
           "SubtitleText": "MSG-03",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/msg-03.png",
+          "Image": "images/satellitesIcons/msg-03.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -127,7 +127,7 @@
           "SubtitleText": "METOP-B",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/metop-b.png",
+          "Image": "images/satellitesIcons/metop-b.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -136,7 +136,7 @@
           "SubtitleText": "NOAA-12",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-12.png",
+          "Image": "images/satellitesIcons/noaa-12.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -145,7 +145,7 @@
           "SubtitleText": "NOAA-12D",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-12d.png",
+          "Image": "images/satellitesIcons/noaa-12d.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -154,7 +154,7 @@
           "SubtitleText": "NOAA-14",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-14.png",
+          "Image": "images/satellitesIcons/noaa-14.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -163,7 +163,7 @@
           "SubtitleText": "NOAA-15",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-15.png",
+          "Image": "images/satellitesIcons/noaa-15.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -172,7 +172,7 @@
           "SubtitleText": "NOAA-15D",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-15d.png",
+          "Image": "images/satellitesIcons/noaa-15d.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -181,7 +181,7 @@
           "SubtitleText": "NOAA-16",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-16.png",
+          "Image": "images/satellitesIcons/noaa-16.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -190,7 +190,7 @@
           "SubtitleText": "NOAA-16N",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-16n.png",
+          "Image": "images/satellitesIcons/noaa-16n.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -199,7 +199,7 @@
           "SubtitleText": "NOAA-17",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-17.png",
+          "Image": "images/satellitesIcons/noaa-17.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -208,7 +208,7 @@
           "SubtitleText": "NOAA-18",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-18.png",
+          "Image": "images/satellitesIcons/noaa-18.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -217,7 +217,7 @@
           "SubtitleText": "NOAA-18D",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-18d.png",
+          "Image": "images/satellitesIcons/noaa-18d.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -226,7 +226,7 @@
           "SubtitleText": "NOAA-19",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-19.png",
+          "Image": "images/satellitesIcons/noaa-19.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -235,7 +235,7 @@
           "SubtitleText": "NOAA-19D",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/noaa-19d.png",
+          "Image": "images/satellitesIcons/noaa-19d.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -244,7 +244,7 @@
           "SubtitleText": "NPP",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/npp.png",
+          "Image": "images/satellitesIcons/npp.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -253,7 +253,7 @@
           "SubtitleText": "NPP_375",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/npp-375.png",
+          "Image": "images/satellitesIcons/npp-375.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -262,7 +262,7 @@
           "SubtitleText": "TERRA-M",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/terra-m.png",
+          "Image": "images/satellitesIcons/terra-m.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -271,7 +271,7 @@
           "SubtitleText": "TERRA-MEX",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/terra-mex.png",
+          "Image": "images/satellitesIcons/terra-mex.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -280,7 +280,7 @@
           "SubtitleText": "TERRA_M-M",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/terra-m-m.png",
+          "Image": "images/satellitesIcons/terra-m-m.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -289,7 +289,7 @@
           "SubtitleText": "TERRA_M-T",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/terra-m-t.png",
+          "Image": "images/satellitesIcons/terra-m-t.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -298,7 +298,7 @@
           "SubtitleText": "TERRA-T",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/terra-t.png",
+          "Image": "images/satellitesIcons/terra-t.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         },
@@ -307,167 +307,7 @@
           "SubtitleText": "TRMM",
           "FillColor": null,
           "BorderColor": null,
-          "Image": "bdqueimadas/images/satellitesIcons/trmm.png",
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        }
-      ]
-    },
-    {
-      "Id": "smoke-subtitles",
-      "LayerId": "brams_pmint_max",
-      "LayerName": "Camada: Fumaça na Coluna Atmosf. (mg/m²)",
-      "Subtitles": [
-        {
-          "SubtitleId": null,
-          "SubtitleText": "10 a 15",
-          "FillColor": "rgb(0, 0, 74)",
-          "BorderColor": "rgb(0, 0, 74)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "15 a 20",
-          "FillColor": "rgb(0, 0, 122)",
-          "BorderColor": "rgb(0, 0, 122)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "20 a 25",
-          "FillColor": "rgb(0, 0, 206)",
-          "BorderColor": "rgb(0, 0, 206)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "25 a 30",
-          "FillColor": "rgb(78, 91, 255)",
-          "BorderColor": "rgb(78, 91, 255)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "30 a 35",
-          "FillColor": "rgb(162, 189, 255)",
-          "BorderColor": "rgb(162, 189, 255)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "35 a 40",
-          "FillColor": "rgb(0, 96, 0)",
-          "BorderColor": "rgb(0, 96, 0)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "40 a 45",
-          "FillColor": "rgb(0, 174, 0)",
-          "BorderColor": "rgb(0, 174, 0)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "45 a 50",
-          "FillColor": "rgb(18, 204, 21)",
-          "BorderColor": "rgb(18, 204, 21)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "50 a 60",
-          "FillColor": "rgb(78, 244, 91)",
-          "BorderColor": "rgb(78, 244, 91)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "60 a 70",
-          "FillColor": "rgb(255, 255, 99)",
-          "BorderColor": "rgb(255, 255, 99)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "70 a 80",
-          "FillColor": "rgb(255, 200, 75)",
-          "BorderColor": "rgb(255, 200, 75)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "80 a 100",
-          "FillColor": "rgb(255, 160, 60)",
-          "BorderColor": "rgb(255, 160, 60)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "100 a 120",
-          "FillColor": "rgb(255, 120, 45)",
-          "BorderColor": "rgb(255, 120, 45)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "120 a 150",
-          "FillColor": "rgb(246, 80, 30)",
-          "BorderColor": "rgb(246, 80, 30)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "150 a 200",
-          "FillColor": "rgb(226, 40, 15)",
-          "BorderColor": "rgb(226, 40, 15)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "200 a 250",
-          "FillColor": "rgb(180, 0, 0)",
-          "BorderColor": "rgb(180, 0, 0)",
-          "Image": null,
-          "MinResolution": 0,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "acima de 250",
-          "FillColor": "rgb(134, 0, 0)",
-          "BorderColor": "rgb(134, 0, 0)",
-          "Image": null,
+          "Image": "images/satellitesIcons/trmm.png",
           "MinResolution": 0,
           "MaxResolution": "Infinity"
         }
@@ -1216,74 +1056,13 @@
           "MaxResolution": "Infinity"
         }
       ]
-    },
-    {
-      "Id": "current-situation-subtitles",
-      "LayerId": "bdqueimadas:situacao_atual_paises|bdqueimadas:situacao_atual_estados|bdqueimadas:situacao_atual_municipios|bdqueimadas:situacao_atual_biomas",
-      "LayerName": "Camada: Mapa Espacial de Focos",
-      "Subtitles": [
-        {
-          "SubtitleId": null,
-          "SubtitleText": "0 focos",
-          "FillColor": "#FFEBCD",
-          "BorderColor": "black",
-          "Image": null,
-          "MinResolution": 0.025,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "De 1 a 100 focos",
-          "FillColor": "#FFC387",
-          "BorderColor": "black",
-          "Image": null,
-          "MinResolution": 0.025,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "De 101 a 500 focos",
-          "FillColor": "#FAA046",
-          "BorderColor": "black",
-          "Image": null,
-          "MinResolution": 0.025,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "De 1001 a 5000 focos",
-          "FillColor": "#FA5C25",
-          "BorderColor": "black",
-          "Image": null,
-          "MinResolution": 0.025,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "De 5001 a 25000 focos",
-          "FillColor": "#C34231",
-          "BorderColor": "black",
-          "Image": null,
-          "MinResolution": 0.025,
-          "MaxResolution": "Infinity"
-        },
-        {
-          "SubtitleId": null,
-          "SubtitleText": "De 25001 a 50000 focos",
-          "FillColor": "#A21C0D",
-          "BorderColor": "black",
-          "Image": null,
-          "MinResolution": 0.025,
-          "MaxResolution": "Infinity"
-        }
-      ]
     }
   ],
   "UseLayerGroupsInTheLayerExplorer": true,
   "EnableAddAndRemoveLayers": false,
   "Layers": [
     {
-      "Id": "bdqueimadas:focos",
+      "Id": "bdqueimadas:focos_bdq_light",
       "Name": "Focos",
       "Title": "Focos",
       "LayerGroup": false,
@@ -1294,14 +1073,14 @@
       "AddsInTheStart": true,
       "AppendAtTheEnd": false,
       "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
+        "Url": "http://localhost:8080/geoserver/ows",
         "ServerType": "geoserver",
         "MinResolution": 0,
         "MaxResolution": "Infinity"
       }
     },
     {
-      "Id": "bdqueimadas:paises",
+      "Id": "bdqueimadas:paises_light",
       "Name": "Países",
       "Title": "Países",
       "LayerGroup": false,
@@ -1312,14 +1091,14 @@
       "AddsInTheStart": true,
       "AppendAtTheEnd": false,
       "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
+        "Url": "http://localhost:8080/geoserver/ows",
         "ServerType": "geoserver",
         "MinResolution": 0,
         "MaxResolution": "Infinity"
       }
     },
     {
-      "Id": "bdqueimadas:estados",
+      "Id": "bdqueimadas:estados_light",
       "Name": "Estados",
       "Title": "Estados",
       "LayerGroup": false,
@@ -1330,14 +1109,14 @@
       "AddsInTheStart": true,
       "AppendAtTheEnd": false,
       "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
+        "Url": "http://localhost:8080/geoserver/ows",
         "ServerType": "geoserver",
         "MinResolution": 0,
         "MaxResolution": "Infinity"
       }
     },
     {
-      "Id": "bdqueimadas:municipios",
+      "Id": "bdqueimadas:municipios_light",
       "Name": "Municípios",
       "Title": "Municípios",
       "LayerGroup": false,
@@ -1348,14 +1127,14 @@
       "AddsInTheStart": true,
       "AppendAtTheEnd": false,
       "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
+        "Url": "http://localhost:8080/geoserver/ows",
         "ServerType": "geoserver",
         "MinResolution": 0,
         "MaxResolution": "Infinity"
       }
     },
     {
-      "Id": "bdqueimadas:biomas_brasileiros",
+      "Id": "bdqueimadas:biomas",
       "Name": "Biomas Brasileiros",
   	  "Title": "Biomas Brasileiros",
       "LayerGroup": false,
@@ -1366,7 +1145,7 @@
       "AddsInTheStart": true,
       "AppendAtTheEnd": false,
       "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
+        "Url": "http://localhost:8080/geoserver/ows",
         "ServerType": "geoserver",
         "MinResolution": 0,
         "MaxResolution": "Infinity"
@@ -1384,7 +1163,7 @@
       "AddsInTheStart": true,
       "AppendAtTheEnd": false,
       "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
+        "Url": "http://localhost:8080/geoserver/ows",
         "ServerType": "geoserver",
         "MinResolution": 0,
         "MaxResolution": "Infinity"
@@ -1396,21 +1175,31 @@
       "LayerGroup": true,
       "Layers": [
         {
-          "Id": "npp_cviirs",
+          "Id": "VIIRS_SNPP_CorrectedReflectance_TrueColor",
           "Name": "NPP / VIIRRS {{FINAL_DATE=YYYY/MM/DD}}",
           "Title": "NPP / VIIRRS",
           "LayerGroup": false,
           "Background": true,
-          "Wmts": false,
+          "Wmts": true,
           "Visible": true,
           "Disabled": false,
           "AddsInTheStart": true,
           "AppendAtTheEnd": false,
           "Params": {
-            "Url": "https://prodwww-queimadas.dgi.inpe.br/queimadas/mapserv?map=MAP_QUEIMADAS",
-            "MinTimeForTodaysImage": "21:00:00",
+            "Url": "//map1{a-c}.vis.earthdata.nasa.gov/wmts-geo/wmts.cgi",
             "ServerType": "mapserver",
-            "Time": "{{FINAL_DATE=YYYY-MM-DD}}"
+            "Time": "{{FINAL_DATE=YYYY-MM-DD}}",
+            "MinTimeForTodaysImage": "21:00:00",
+            "Version": "1.1.0",
+            "Format": "image/jpeg",
+            "MatrixSet": "EPSG4326_250m",
+            "TileGrid": {
+              "origin": [-180, 90],
+              "extent": [-178.76249957084656, -88.875, 179.55000042915344, 77.625],
+              "resolutions": [0.5625, 0.28125, 0.140625, 0.0703125, 0.03515625, 0.017578125, 0.0087890625, 0.00439453125, 0.002197265625],
+              "matrixIds": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+              "tileSize": 512
+            }
           }
         },
         {
@@ -2045,24 +1834,6 @@
           }
         }
       ]
-    },
-    {
-      "Id": "bdqueimadas:blue_marble_pyramid",
-      "Name": "Blue Marble",
-      "Title": "Blue Marble (NASA)",
-      "LayerGroup": false,
-      "Background": true,
-      "Wmts": false,
-      "Visible": false,
-      "Disabled": false,
-      "AddsInTheStart": true,
-      "AppendAtTheEnd": false,
-      "Params": {
-        "Url": "https://prodwww-queimadas.dgi.inpe.br/geoserver/ows",
-        "ServerType": "geoserver",
-        "MinResolution": 0,
-        "MaxResolution": "Infinity"
-      }
     },
     {
       "Id": "osm",

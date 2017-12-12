@@ -420,7 +420,7 @@ define(
      * @inner
      */
     var createBiomesFilter = function() {
-      var cql = "(" + Utils.getConfigurations().filterConfigurations.LayerToFilter.BiomeFieldName + " in (";
+      var cql = "(" + Utils.getConfigurations().filterConfigurations.LayerToFilter.BiomeIdFieldName + " in (";
 
       var memberBiomesLength = memberBiomes.length;
 
@@ -866,20 +866,19 @@ define(
      * @inner
      */
     var resetDropdowns = function() {
-      disableDropdown('countries', '');
-      $('#countries').empty();
       disableDropdown('states', '');
       $('#states').empty();
 
-      enableDropdown('countries-graphics', '');
-      $('#countries-graphics').empty();
       disableDropdown('states-graphics', '');
       $('#states-graphics').empty();
 
-      enableDropdown('countries-attributes-table', '');
-      $('#countries-attributes-table').empty();
       disableDropdown('states-attributes-table', '');
       $('#states-attributes-table').empty();
+
+      clearStates();
+
+      enableDropdown('countries', '');
+      $('#countries').change();
     };
 
     /**

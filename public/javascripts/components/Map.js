@@ -439,7 +439,7 @@ define(
             css += "border: solid 2px " + configuration.Subtitles[i].Subtitles[j].BorderColor + ";";
 
           if(configuration.Subtitles[i].Subtitles[j].Image !== null)
-            css += "background: url(" + configuration.Subtitles[i].Subtitles[j].Image + ");background-size: 12px;background-position: center;background-repeat: no-repeat;";
+            css += "background: url(" + Utils.getBaseUrl() + configuration.Subtitles[i].Subtitles[j].Image + ");background-size: 12px;background-position: center;background-repeat: no-repeat;";
 
           elem += "<li class=\"subtitle-item";
 
