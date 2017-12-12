@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.name %> <%= pkg.version %> | (C) 2007, <%= grunt.template.today("yyyy") %> National Institute For Space Research (INPE) - Brazil | https://github.com/TerraMA2/terrama2/blob/master/LICENSE */',
+    banner: '/*! <%= pkg.name %> <%= pkg.version %> | (C) 2007, <%= grunt.template.today("yyyy") %> National Institute For Space Research (INPE) - Brazil | https://github.com/TerraMA2/bdqueimadas-light/blob/master/LICENSE */',
     requirejs: {
       BDQueimadas: {
         options: {
@@ -49,15 +49,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    jsdoc : {
-      BDQueimadas: {
-        src: ['README.md'],
-        options: {
-          configure: 'configurations/jsdoc/config.json',
-          destination: 'public/docs'
-        }
-      }
-    },
     watch: {
       css: {
         files: ["public/stylesheets/*.css"],
@@ -95,9 +86,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-banner');
-  grunt.loadNpmTasks('grunt-jsdoc');
 
   // Default tasks.
-  grunt.registerTask('default', ['requirejs', 'cssmin', 'usebanner:BDQueimadas', 'jsdoc']);
+  grunt.registerTask('default', ['requirejs', 'cssmin', 'usebanner:BDQueimadas']);
 
 };
