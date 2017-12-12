@@ -1,0 +1,64 @@
+<!-- Socket.IO -->
+<script type="text/javascript" src="<%- BASE_URL %>socket.io/socket.io.js"></script>
+<!-- jQuery 2.1.4 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/bootstrap/js/bootstrap.min.js"></script>
+<!-- jQuery UI 1.12.0 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/jQueryUI/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script type="text/javascript">
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Slimscroll -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/adminlte/js/app.min.js"></script>
+<!-- DataTables -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<%- BASE_URL %>externals/datatables/dataTables.bootstrap.min.js"></script>
+<!-- ChartJS 2.1.6 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/chartjs/Chart.min.js"></script>
+<!-- InputMask -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/input-mask/jquery.inputmask.js"></script>
+<script type="text/javascript" src="<%- BASE_URL %>externals/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script type="text/javascript" src="<%- BASE_URL %>externals/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- Vex 2.2.1 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/vex/vex.combined.min.js"></script>
+<script>vex.defaultOptions.className = 'vex-theme-default';</script>
+<!-- Queimadas -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/adminlte/js/queimadas.js"></script>
+<!-- wtss.js -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/wtss.js/wtss.js"></script>
+<!-- OpenLayers 3.15.0 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/openlayers/ol.js"></script>
+<!-- moment 2.14.1 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/moment/moment-with-locales.js"></script>
+<!-- moment-timezone 0.5.5 -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/moment/moment-timezone-with-data.js"></script>
+<!-- Bootstrap Slider -->
+<script type="text/javascript" src="<%- BASE_URL %>externals/bootstrap-slider/bootstrap-slider.js"></script>
+<!-- Variables used in TerraMA² and BDQueimadas -->
+<script type="text/javascript">
+  var configurations = JSON.parse('<%- JSON.stringify(configurations) %>');
+  var BASE_URL = '<%- BASE_URL %>';
+
+  <%
+  var satellites = "";
+
+  for(var i = 0, satellitesLength = configurations.filterConfigurations.Satellites.length; i < satellitesLength; i++)
+    if(configurations.filterConfigurations.Satellites[i].Current)
+      if(configurations.filterConfigurations.Satellites[i].Selected)
+        satellites += "'" + configurations.filterConfigurations.Satellites[i].Id + "', ";
+
+  satellites = satellites.slice(0, -2);
+  %>
+
+  var initialSatellites = [<%- satellites %>];
+</script>
+<!-- BDQueimadas / RequireJS 2.2.0 -->
+<!--<script type="text/javascript" src="<%- BASE_URL %>dist/BDQueimadas.min.js"></script>-->
+
+<script data-main="<%- BASE_URL %>javascripts/Startup.js" src="<%- BASE_URL %>externals/require.js/require.js"></script>

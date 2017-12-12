@@ -1,0 +1,26 @@
+<header class="main-header">
+  <a href="<%- BASE_URL %>">
+    <span class="logo">
+      <span class="logo-mini"></span>
+    </span>
+  </a>
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div id="page-title">
+      <span class="dynamic-text"><%= __('BDQueimadas Light') %></span>
+    </div>
+    <div id="page-second-title" style="font-size: 20px; font-weight: 900; margin: 0 auto; width: 360px;">
+      <div class="inpe-image" title="<%= __('INPE') %>" style="margin-top: 8px;"></div>
+      <div class="programa-queimadas-image" title="<%= __('Programa Queimadas') %>" style="margin-top: 8px;"></div>
+      <div class="text" style="position: absolute; margin-top: 10px;"><%= __('INPE - Programa Queimadas') %> </div>
+    </div>
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <li id="languages-secondary" class="hidden">
+          <a href="<%- BASE_URL %>" class="languages-item portuguese" title="<%= __('Português') %>"></a>
+          <a href="<%- BASE_URL %>en" class="languages-item english" title="<%= __('English') %>"></a>
+          <a href="<%- BASE_URL %>es" class="languages-item spanish" title="<%= __('Español') %>"></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
