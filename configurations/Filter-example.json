@@ -1,39 +1,39 @@
 {
   "LayerToFilter": {
-    "LayerId": "bdqueimadas:focos",
-    "IdFieldName": "id_foco_bdq",
-    "DateTimeFieldName": "data_hora_gmt",
+    "LayerId": "bdqueimadas:focos_bdq_light",
+    "IdFieldName": "pid",
+    "DateTimeFieldName": "data_pas",
     "SatelliteFieldName": "satelite",
-    "CityFieldName": "municipio_complete_id",
-    "CityNameFieldName": "municipio",
-    "StateFieldName": "estado_complete_id",
-    "StateNameFieldName": "estado",
-    "CountryFieldName": "pais_complete_id",
-    "CountryNameFieldName": "pais",
-    "BiomeFieldName": "bioma",
+    "CityFieldName": "municipio_id",
+    "CityNameFieldName": "municipio_nome",
+    "StateFieldName": "estado_id",
+    "StateNameFieldName": "estado_nome",
+    "CountryFieldName": "pais_id",
+    "CountryNameFieldName": "pais_nome",
+    "BiomeIdFieldName": "bioma_id",
+    "BiomeFieldName": "bioma_nome",
     "DateFormat": "YYYY-MM-DD",
     "DateTimeFormat": "YYYY-MM-DD HH:II:SS",
     "InitialDate": "{{-|1|d=YYYY-MM-DD}}",
     "FinalDate": "{{0=YYYY-MM-DD}}"
   },
   "CountriesLayer": {
-    "Id": "bdqueimadas:paises"
+    "Id": "bdqueimadas:paises_light"
   },
   "StatesLayer": {
-    "Id": "bdqueimadas:estados",
-    "CountryField": "id_0"
+    "Id": "bdqueimadas:estados_light",
+    "CountryField": "pais_id"
   },
   "CitiesLayer": {
-    "Id": "bdqueimadas:municipios",
-    "CountryField": "id_0",
+    "Id": "bdqueimadas:municipios_light",
+    "CountryField": "pais_id",
     "StateField": "complete_id_state",
     "CityField": "complete_id"
   },
   "ProtectedAreas": {
     "UCF": {
-      "LayerName": "bdqueimadas:unidades_conservacao_federais_new_nao_reservas",
-      "IdField": "id_ucf",
-      "NamesLayer": "bdqueimadas:labels_unidades_conservacao_federais_new_nao_reservas"
+      "LayerName": "bdqueimadas:unidades_conservacao_federais",
+      "IdField": "gid"
     }
   },
   "SpatialFilter": {
@@ -54,11 +54,7 @@
       "2440002": "-195,44.43674293405114,-125,76.56325706594886",
       "0330008": "-44.75,-21.47964333781965,-36.45,-17.67035666218035"
     },
-    "ProtectedAreas": {
-      "UCE": {},
-      "UCF": {},
-      "TI": {}
-    },
+    "ProtectedAreas": {},
     "Cities": {}
   },
   "Satellites": [

@@ -1,6 +1,6 @@
 {
-  "name": "BDQueimadas",
-  "version": "1.0.0-alpha",
+  "name": "BDQueimadas-Light",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -31,8 +31,6 @@
     "grunt-contrib-cssmin": "^1.0.1",
     "grunt-contrib-requirejs": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-jsdoc": "^2.1.0",
-    "jsdoc": "^3.4.0",
     "requirejs": "^2.2.0"
   }
 }

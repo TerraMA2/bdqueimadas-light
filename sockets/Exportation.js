@@ -15,7 +15,6 @@
  * @property {function} memberExec - Exec function.
  * @property {function} memberExecSync - Exec function sync.
  * @property {function} memberSpawn - Spawn function.
- * @property {function} memberGetUserIp - Function responsible for returning the user ip address.
  */
 var Exportation = function(io) {
 
@@ -35,33 +34,6 @@ var Exportation = function(io) {
   var memberExecSync = require('child_process').execSync;
   // Spawn function
   var memberSpawn = require('child_process').spawn;
-  // Function responsible for returning the user ip address
-  var memberGetUserIp = function(handshake) {
-    var ip = null;
-
-    if(handshake.headers !== undefined && handshake.headers['geoip_addr'] !== undefined)
-      ip = handshake.headers.geoip_addr;
-
-    if(ip === null && handshake.headers !== undefined && handshake.headers['x-forwarded-for'] !== undefined) {
-      var ipArray = handshake.headers['x-forwarded-for'].split(', ');
-      ip = ipArray[0];
-    }
-
-    if(ip === null && handshake.headers !== undefined && handshake.headers['x-real-ip'] !== undefined)
-      ip = handshake.headers['x-real-ip'];
-
-    if(ip === null && handshake.address !== undefined) {
-      if(handshake.address.indexOf('::ffff:') !== -1)
-        ip = handshake.address.replace('::ffff:', '');
-      else
-        ip = handshake.address;
-    }
-
-    if(ip === null)
-      ip = "...";
-
-    return ip;
-  };
 
   // Socket connection event
   memberSockets.on('connection', function(client) {
@@ -78,9 +50,6 @@ var Exportation = function(io) {
       if(json.cities !== undefined && json.cities !== null && json.cities !== '') options.cities = json.cities;
       if(json.decimalSeparator !== undefined && json.decimalSeparator !== null && json.decimalSeparator !== '') options.decimalSeparator = json.decimalSeparator;
       if(json.fieldSeparator !== undefined && json.fieldSeparator !== null && json.fieldSeparator !== '') options.fieldSeparator = json.fieldSeparator;
-      options.bufferInternal = (json.bufferInternal == "true");
-      options.bufferFive = (json.bufferFive == "true");
-      options.bufferTen = (json.bufferTen == "true");
 
       var requestFormats = json.format.split(',');
 
@@ -93,155 +62,148 @@ var Exportation = function(io) {
       var dataTimeTo = json.dateTimeTo.split(' ');
       var fileName = 'Focos.' + dataTimeFrom[0] + '.' + dataTimeTo[0];
 
-      var userIp = memberGetUserIp(client.handshake);
+      require('crypto').randomBytes(24, function(err, buffer) {
+        var today = new Date();
 
-      // Call of the method 'registerDownload', responsible for registering the download in the database
-      memberExportation.registerDownload(json.dateTimeFrom, json.dateTimeTo, requestFormats.toString(), userIp, options, function(err, registerDownloadResult) {
-        if(err) return console.error(err);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
 
-        require('crypto').randomBytes(24, function(err, buffer) {
-          var today = new Date();
+        if(dd < 10) dd = '0' + dd;
+        if(mm < 10) mm = '0' + mm;
 
-          var dd = today.getDate();
-          var mm = today.getMonth() + 1;
-          var yyyy = today.getFullYear();
+        var todayString = yyyy + '-' + mm + '-' + dd;
+        var filesFolder = buffer.toString('hex') + '_--_' + todayString;
 
-          if(dd < 10) dd = '0' + dd;
-          if(mm < 10) mm = '0' + mm;
+        var connectionString = memberExportation.getPgConnectionString();
+        var separator = (options.fieldSeparator !== undefined && options.fieldSeparator == "semicolon" ? "SEMICOLON" : "COMMA");
+        var folderPath = memberPath.join(__dirname, '../tmp/' + filesFolder);
 
-          var todayString = yyyy + '-' + mm + '-' + dd;
-          var filesFolder = buffer.toString('hex') + '_--_' + todayString;
+        try {
+          memberFs.mkdirSync(folderPath);
+        } catch(e) {
+          if(e.code != 'EEXIST')
+            console.error(e);
+        }
 
-          var connectionString = memberExportation.getPgConnectionString();
-          var separator = (options.fieldSeparator !== undefined && options.fieldSeparator == "semicolon" ? "SEMICOLON" : "COMMA");
-          var folderPath = memberPath.join(__dirname, '../tmp/' + filesFolder);
+        var processedFormats = 0;
+        var progress = null;
+        var progressStep = 2.5 / requestFormats.length;
 
-          try {
-            memberFs.mkdirSync(folderPath);
-          } catch(e) {
-            if(e.code != 'EEXIST')
-              console.error(e);
+        for(var i = 0, formatsLength = requestFormats.length; i < formatsLength; i++) {
+          switch(requestFormats[i]) {
+            case 'csv':
+              var fileExtention = '.csv';
+              var ogr2ogrFormat = 'CSV';
+              break;
+            case 'shapefile':
+              var fileExtention = '.shp';
+              var ogr2ogrFormat = 'ESRI Shapefile';
+              break;
+            case 'kml':
+              var fileExtention = '.kml';
+              var ogr2ogrFormat = 'KML';
+              break;
+            default:
+              var fileExtention = '.json';
+              var ogr2ogrFormat = 'GeoJSON';
           }
 
-          var processedFormats = 0;
-          var progress = null;
-          var progressStep = 2.5 / requestFormats.length;
-
-          for(var i = 0, formatsLength = requestFormats.length; i < formatsLength; i++) {
-            switch(requestFormats[i]) {
-              case 'csv':
-                var fileExtention = '.csv';
-                var ogr2ogrFormat = 'CSV';
-                break;
-              case 'shapefile':
-                var fileExtention = '.shp';
-                var ogr2ogrFormat = 'ESRI Shapefile';
-                break;
-              case 'kml':
-                var fileExtention = '.kml';
-                var ogr2ogrFormat = 'KML';
-                break;
-              default:
-                var fileExtention = '.json';
-                var ogr2ogrFormat = 'GeoJSON';
+          if(requestFormats[i] == 'shapefile') {
+            try {
+              memberFs.mkdirSync(folderPath + "/shapefile");
+            } catch(e) {
+              if(e.code != 'EEXIST')
+                console.error(e);
             }
+          }
 
-            if(requestFormats[i] == 'shapefile') {
-              try {
-                memberFs.mkdirSync(folderPath + "/shapefile");
-              } catch(e) {
-                if(e.code != 'EEXIST')
-                  console.error(e);
-              }
-            }
+          var ogr2ogr = memberExportation.ogr2ogr();
+          var filePath = memberPath.join(__dirname, '../tmp/' + filesFolder + (requestFormats[i] == 'shapefile' ? '/shapefile/' : '/') + fileName + fileExtention);
+          var args = ['-progress', '-F', ogr2ogrFormat, filePath, connectionString, '-sql', memberExportation.getQuery((requestFormats[i] != 'csv'), json.dateTimeFrom, json.dateTimeTo, options), '-skipfailures'];
 
-            var ogr2ogr = memberExportation.ogr2ogr();
-            var filePath = memberPath.join(__dirname, '../tmp/' + filesFolder + (requestFormats[i] == 'shapefile' ? '/shapefile/' : '/') + fileName + fileExtention);
-            var args = ['-progress', '-F', ogr2ogrFormat, filePath, connectionString, '-sql', memberExportation.getQuery((requestFormats[i] != 'csv'), json.dateTimeFrom, json.dateTimeTo, options), '-skipfailures'];
+          if(requestFormats[i] == "csv")
+            args.push('-lco', 'LINEFORMAT=CRLF', '-lco', 'SEPARATOR=' + separator);
 
-            if(requestFormats[i] == "csv")
-              args.push('-lco', 'LINEFORMAT=CRLF', '-lco', 'SEPARATOR=' + separator);
+          var spawnCommand = memberSpawn(ogr2ogr, args);
 
-            var spawnCommand = memberSpawn(ogr2ogr, args);
+          spawnCommand.stdout.on('data', function(data) {
+            if(progress === null)
+              progress = 0;
+            else
+              progress += progressStep;
 
-            spawnCommand.stdout.on('data', function(data) {
-              if(progress === null)
-                progress = 0;
-              else
-                progress += progressStep;
+            client.emit('generateFileResponse', { progress: progress });
+          });
 
-              client.emit('generateFileResponse', { progress: progress });
-            });
+          spawnCommand.stderr.on('data', function(data) {
+            console.error(err);
+          });
 
-            spawnCommand.stderr.on('data', function(data) {
-              console.error(err);
-            });
+          spawnCommand.on('error', function(err) {
+            console.error(err);
+          });
 
-            spawnCommand.on('error', function(err) {
-              console.error(err);
-            });
+          spawnCommand.on('exit', function(code) {
+            processedFormats++;
 
-            spawnCommand.on('exit', function(code) {
-              processedFormats++;
+            if(processedFormats == formatsLength) {
+              var finalizeProcess = function() {
+                if(requestFormats.length == 1) {
+                  switch(requestFormats[0]) {
+                    case 'csv':
+                      var fileExtention = '.csv';
+                      break;
+                    case 'shapefile':
+                      var fileExtention = '.shp';
+                      break;
+                    case 'kml':
+                      var fileExtention = '.kml';
+                      break;
+                    default:
+                      var fileExtention = '.json';
+                  }
 
-              if(processedFormats == formatsLength) {
-                var finalizeProcess = function() {
-                  if(requestFormats.length == 1) {
-                    switch(requestFormats[0]) {
-                      case 'csv':
-                        var fileExtention = '.csv';
-                        break;
-                      case 'shapefile':
-                        var fileExtention = '.shp';
-                        break;
-                      case 'kml':
-                        var fileExtention = '.kml';
-                        break;
-                      default:
-                        var fileExtention = '.json';
-                    }
+                  var finalPath = memberPath.join(__dirname, '../tmp/' + filesFolder) + "/" + fileName + fileExtention + (requestFormats[0] == 'shapefile' ? '.zip' : '');
+                  var finalFileName = fileName + fileExtention + (requestFormats[0] == 'shapefile' ? '.zip' : '');
 
-                    var finalPath = memberPath.join(__dirname, '../tmp/' + filesFolder) + "/" + fileName + fileExtention + (requestFormats[0] == 'shapefile' ? '.zip' : '');
-                    var finalFileName = fileName + fileExtention + (requestFormats[0] == 'shapefile' ? '.zip' : '');
+                  client.emit('generateFileResponse', { 
+                    folder: filesFolder,
+                    file: finalFileName
+                  });
+                } else {
+                  var finalPath = memberPath.join(__dirname, '../tmp/' + filesFolder) + "/" + fileName + ".zip";
+                  var finalFileName = fileName + ".zip";
+
+                  var zipGenerationCommand = "zip -r -j " + finalPath + " " + folderPath;
+
+                  memberExec(zipGenerationCommand, function(zipGenerationCommandErr, zipGenerationCommandOut, zipGenerationCommandCode) {
+                    if(zipGenerationCommandErr) return console.error(zipGenerationCommandErr);
 
                     client.emit('generateFileResponse', { 
                       folder: filesFolder,
                       file: finalFileName
                     });
-                  } else {
-                    var finalPath = memberPath.join(__dirname, '../tmp/' + filesFolder) + "/" + fileName + ".zip";
-                    var finalFileName = fileName + ".zip";
-
-                    var zipGenerationCommand = "zip -r -j " + finalPath + " " + folderPath;
-
-                    memberExec(zipGenerationCommand, function(zipGenerationCommandErr, zipGenerationCommandOut, zipGenerationCommandCode) {
-                      if(zipGenerationCommandErr) return console.error(zipGenerationCommandErr);
-
-                      client.emit('generateFileResponse', { 
-                        folder: filesFolder,
-                        file: finalFileName
-                      });
-                    });
-                  }
-                };
-
-                if(memberUtils.stringInArray(requestFormats, 'shapefile')) {
-                  var zipPath = memberPath.join(__dirname, '../tmp/' + filesFolder) + "/" + fileName + ".shp.zip";
-                  var zipGenerationCommand = "zip -r -j " + zipPath + " " + folderPath + "/shapefile";
-
-                  try {
-                    var zipGenerationCommandResult = memberExecSync(zipGenerationCommand);
-                    memberUtils.deleteFolderRecursively(folderPath + "/shapefile", finalizeProcess);
-                  } catch(e) {
-                    console.error(e);
-                  }
-                } else {
-                  finalizeProcess();
+                  });
                 }
+              };
+
+              if(memberUtils.stringInArray(requestFormats, 'shapefile')) {
+                var zipPath = memberPath.join(__dirname, '../tmp/' + filesFolder) + "/" + fileName + ".shp.zip";
+                var zipGenerationCommand = "zip -r -j " + zipPath + " " + folderPath + "/shapefile";
+
+                try {
+                  var zipGenerationCommandResult = memberExecSync(zipGenerationCommand);
+                  memberUtils.deleteFolderRecursively(folderPath + "/shapefile", finalizeProcess);
+                } catch(e) {
+                  console.error(e);
+                }
+              } else {
+                finalizeProcess();
               }
-            });
-          }
-        });
+            }
+          });
+        }
       });
     });
 
@@ -257,9 +219,6 @@ var Exportation = function(io) {
       if(json.states !== undefined && json.states !== null && json.states !== '') options.states = json.states;
       if(json.cities !== undefined && json.cities !== null && json.cities !== '') options.cities = json.cities;
       options.limit = 1;
-      options.bufferInternal = (json.bufferInternal == "true");
-      options.bufferFive = (json.bufferFive == "true");
-      options.bufferTen = (json.bufferTen == "true");
 
       // Call of the method 'getGeoJSONData', responsible for returning the fires data in GeoJSON format
       memberExportation.getGeoJSONData(json.dateTimeFrom, json.dateTimeTo, options, function(err, GeoJSONData) {

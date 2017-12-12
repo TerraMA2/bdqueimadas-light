@@ -140,9 +140,6 @@ define(
                                        "<a href=\"#\" class=\"btn btn-app graphic-button export-graphic-data\" data-id=\"" + firesCountGraphicsConfig[i].Id +
                                        "\"><i class=\"fa fa-download\"></i>Exportar Dados em CSV</a>";
 
-                    if(firesCountGraphicsConfig[i].PAGraphic)
-                      htmlElements += "<a href=\"https://dev-queimadas.dgi.inpe.br/estatisticas/ucs_tis/repositorio_relat/relatorio.html\" target=\"_blank\" class=\"btn btn-app graphic-button\"><i class=\"fa fa-plus\"></i>Mais Detalhes</a>";
-
                     htmlElements += "<div id=\"fires-count-" + firesCountGraphicsConfig[i].Id +
                                     "-graphic-message-container\" class=\"text-center\">" +
                                     "</div></div></div></div>";
@@ -155,9 +152,6 @@ define(
                                        "<canvas id=\"fires-count-" + firesCountGraphicsConfig[i].Id + "-graphic\"></canvas>" +
                                        "<a href=\"#\" class=\"btn btn-app graphic-button export-graphic-data\" data-id=\"" + firesCountGraphicsConfig[i].Id +
                                        "\"><i class=\"fa fa-download\"></i>Exportar Dados em CSV</a>";
-
-                    if(firesCountGraphicsConfig[i].PAGraphic)
-                      htmlElements += "<a href=\"https://dev-queimadas.dgi.inpe.br/estatisticas/ucs_tis/repositorio_relat/relatorio.html\" target=\"_blank\" class=\"btn btn-app graphic-button\"><i class=\"fa fa-plus\"></i>Mais Detalhes</a>";
 
                     htmlElements += "<div id=\"fires-count-" + firesCountGraphicsConfig[i].Id + "-graphic-message-container\" class=\"text-center\"></div></div></div></div>";
                   }

@@ -371,15 +371,19 @@ define(
 
     /**
      * Sets the map to its initial extent.
+     * @param {boolean} applyFilter - Flag that indicates if the filter should be applied
      *
      * @function initialExtent
      * @memberof Map
      * @inner
      */
-    var initialExtent = function() {
+    var initialExtent = function(applyFilter) {
       TerraMA2WebComponents.MapDisplay.zoomToExtent(Utils.getConfigurations().applicationConfigurations.ContinentExtent);
-      $.event.trigger({type: "applyFilter"});
-      $.event.trigger({type: "updateComponents"});
+
+      if(applyFilter) {
+        $.event.trigger({type: "applyFilter"});
+        $.event.trigger({type: "updateComponents"});
+      }
     };
 
     /**
@@ -439,7 +443,7 @@ define(
             css += "border: solid 2px " + configuration.Subtitles[i].Subtitles[j].BorderColor + ";";
 
           if(configuration.Subtitles[i].Subtitles[j].Image !== null)
-            css += "background: url(" + configuration.Subtitles[i].Subtitles[j].Image + ");background-size: 12px;background-position: center;background-repeat: no-repeat;";
+            css += "background: url(" + Utils.getBaseUrl() + configuration.Subtitles[i].Subtitles[j].Image + ");background-size: 12px;background-position: center;background-repeat: no-repeat;";
 
           elem += "<li class=\"subtitle-item";
 

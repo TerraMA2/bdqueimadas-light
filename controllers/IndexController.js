@@ -50,14 +50,19 @@ var IndexController = function(app) {
     memberFilter.getCountries(function(err, result) {
       if(err) return console.error(err);
 
-      // Response parameters
-      var params = {
-        countries: result,
-        configurations: configurations,
-      };
+      memberFilter.getBiomes(function(err, resultBiomes) {
+        if(err) return console.error(err);
 
-      // Response (page rendering)
-      response.render('index', params);
+        // Response parameters
+        var params = {
+          countries: result,
+          biomes: resultBiomes,
+          configurations: configurations,
+        };
+
+        // Response (page rendering)
+        response.render('index', params);
+      });
     });
   };
 

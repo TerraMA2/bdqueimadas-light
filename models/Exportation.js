@@ -102,9 +102,7 @@ var Exportation = function() {
         // Creation of the query
         var query = "select ST_AsGeoJSON(" + memberTablesConfig.Fires.GeometryFieldName + ")::json as geometry, row_to_json((select columns from (select " +
                     columns + ") as columns)) as properties from " + memberTablesConfig.Fires.Schema + "." +
-                    memberTablesConfig.Fires.TableName + " FiresTable left outer join " + memberTablesConfig.IndustrialAreas.Schema + "." + memberTablesConfig.IndustrialAreas.TableName + " IndustrialAreasTable " +
-                    "on (FiresTable." + memberTablesConfig.Fires.IndustrialFiresFieldName + " = IndustrialAreasTable." + memberTablesConfig.IndustrialAreas.IdFieldName + ") " +
-                    "where (FiresTable." + memberTablesConfig.Fires.DateTimeFieldName +
+                    memberTablesConfig.Fires.TableName + " FiresTable where (FiresTable." + memberTablesConfig.Fires.DateTimeFieldName +
                     " between $" + (parameter++) + " and $" + (parameter++) + ")",
             params = [dateTimeFrom, dateTimeTo];
 
@@ -167,7 +165,7 @@ var Exportation = function() {
       columns += ", FiresTable." + memberTablesConfig.Fires.GeometryFieldName;
 
     // Creation of the query
-    var query = "select " + columns + " from " + memberTablesConfig.Fires.Schema + "." + memberTablesConfig.Fires.TableName + " FiresTable left outer join " + memberTablesConfig.IndustrialAreas.Schema + "." + memberTablesConfig.IndustrialAreas.TableName + " IndustrialAreasTable on (FiresTable." + memberTablesConfig.Fires.IndustrialFiresFieldName + " = IndustrialAreasTable." + memberTablesConfig.IndustrialAreas.IdFieldName + ") where (FiresTable." + memberTablesConfig.Fires.DateTimeFieldName + " between %L and %L)",
+    var query = "select " + columns + " from " + memberTablesConfig.Fires.Schema + "." + memberTablesConfig.Fires.TableName + " FiresTable where (FiresTable." + memberTablesConfig.Fires.DateTimeFieldName + " between %L and %L)",
         params = [dateTimeFrom, dateTimeTo];
 
     options.exportFilter = true;
@@ -191,76 +189,6 @@ var Exportation = function() {
     var finalQuery = memberPgFormat.apply(null, params);
 
     return finalQuery;
-  };
-
-  /**
-   * Registers the downloads in the database.
-   * @param {string} dateTimeFrom - Initial date / time
-   * @param {string} dateTimeTo - Final date / time
-   * @param {string} format - Exportation file format
-   * @param {string} ip - Ip of the user
-   * @param {json} options - Filtering options
-   * @param {databaseOperationCallback} callback - Callback function
-   * @returns {databaseOperationCallback} callback - Execution of the callback function, which will process the received data
-   *
-   * @function registerDownload
-   * @memberof Exportation
-   * @inner
-   */
-  this.registerDownload = function(dateTimeFrom, dateTimeTo, format, ip, options, callback) {
-    var date = new Date();
-
-    var dateString = date.getFullYear().toString() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-    var timeString = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
-
-    // Connection with the PostgreSQL database
-    memberPgPool.connect(function(err, client, done) {
-      if(!err) {
-
-        // Creation of the query
-        var query = "insert into " + memberTablesConfig.Downloads.Schema + "." + memberTablesConfig.Downloads.TableName + " (" +
-                    memberTablesConfig.Downloads.DateTimeFieldName + ", " + memberTablesConfig.Downloads.IpFieldName + ", " +
-                    memberTablesConfig.Downloads.FilterBeginFieldName + ", " + memberTablesConfig.Downloads.FilterEndFieldName + ", " +
-                    memberTablesConfig.Downloads.FilterSatellitesFieldName + ", " + memberTablesConfig.Downloads.FilterBiomesFieldName + ", " +
-                    memberTablesConfig.Downloads.FilterCountriesFieldName + ", " + memberTablesConfig.Downloads.FilterStatesFieldName + ", " +
-                    memberTablesConfig.Downloads.FilterCitiesFieldName + ", " + memberTablesConfig.Downloads.FilterFormatFieldName + ") values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);",
-            params = [dateString + ' ' + timeString, ip, dateTimeFrom, dateTimeTo];
-
-        if(options.satellites !== undefined)
-          params.push(options.satellites.split(','));
-        else
-          params.push(null);
-
-        if(options.biomes !== undefined)
-          params.push(options.biomes.split(','));
-        else
-          params.push(null);
-
-        if(options.countries !== undefined)
-          params.push(options.countries.split(','));
-        else
-          params.push(null);
-
-        if(options.states !== undefined)
-          params.push(options.states.split(','));
-        else
-          params.push(null);
-
-        if(options.cities !== undefined)
-          params.push(options.cities.split(','));
-        else
-          params.push(null);
-
-        params.push(format);
-
-        // Execution of the query
-        client.query(query, params, function(err, result) {
-          done();
-          if(!err) return callback(null, result);
-          else return callback(err);
-        });
-      } else return callback(err);
-    });
   };
 };
 

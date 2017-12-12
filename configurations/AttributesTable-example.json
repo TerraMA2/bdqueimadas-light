@@ -1,68 +1,59 @@
 {
   "Columns": [
     {
-      "TableAlias": "focos",
-      "Name": "data_hora",
+      "TableAlias": "FiresTable",
+      "Name": "data_pas",
       "Alias": "Data / Hora",
       "ExportAlias": "DataHora",
+      "UnaccentAtExportation": false,
       "Order": "desc",
       "String": false
     },
     {
-      "TableAlias": "focos",
+      "TableAlias": "FiresTable",
       "Name": "satelite",
       "Alias": "Satélite",
       "ExportAlias": "Satelite",
+      "UnaccentAtExportation": true,
       "Order": null,
       "String": true
     },
     {
-      "TableAlias": "focos",
-      "Name": "pais",
+      "TableAlias": "FiresTable",
+      "Name": "pais_nome",
       "Alias": "País",
       "ExportAlias": "Pais",
+      "UnaccentAtExportation": true,
       "Order": null,
       "String": true
     },
     {
-      "TableAlias": "focos",
-      "Name": "estado",
+      "TableAlias": "FiresTable",
+      "Name": "estado_nome",
       "Alias": "Estado",
       "ExportAlias": "Estado",
+      "UnaccentAtExportation": true,
       "Order": null,
       "String": true
     },
     {
-      "TableAlias": "focos",
-      "Name": "municipio",
+      "TableAlias": "FiresTable",
+      "Name": "municipio_nome",
       "Alias": "Município",
       "ExportAlias": "Municipi",
+      "UnaccentAtExportation": true,
       "Order": null,
       "String": true
     },
     {
-      "TableAlias": "focos",
-      "Name": "bioma",
+      "TableAlias": "FiresTable",
+      "Name": "bioma_nome",
       "Alias": "Bioma",
       "ExportAlias": "Bioma",
+      "UnaccentAtExportation": true,
       "Order": null,
       "String": true
-    },
-    {
-      "TableAlias": "focos",
-      "Name": "latitude",
-      "Alias": "Latitude",
-      "ExportAlias": "Latitude",
-      "Order": null,
-      "String": false
-    },
-    {
-      "TableAlias": "focos",
-      "Name": "longitude",
-      "Alias": "Longitude",
-      "ExportAlias": "Longitud",
-      "Order": null,
-      "String": false
     }
   ]
 }
+

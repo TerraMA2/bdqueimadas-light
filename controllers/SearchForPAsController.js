@@ -26,49 +26,12 @@ var SearchForPAsController = function(app) {
 
     // Setting the string to uppercase, removing excessive spaces and non alphanumeric characters
     var searchValue = request.query.value.toUpperCase().replace(/\W /g, '').replace(/\s+/g, ' ').trim();
-    var searchFor = {
-      'UCE': true,
-      'UCF': true,
-      'TI': true
-    };
-
     var searchValueArray = searchValue.split(' ');
-
-    var uceInArray = stringInArray(searchValueArray, 'UCE');
-    var ucfInArray = stringInArray(searchValueArray, 'UCF');
-    var tiInArray = stringInArray(searchValueArray, 'TI');
-
-    var index = searchValueArray.indexOf("UCE");
-    if(index > -1) searchValueArray.splice(index, 1);
-
-    index = searchValueArray.indexOf("UCF");
-    if(index > -1) searchValueArray.splice(index, 1);
-
-    index = searchValueArray.indexOf("TI");
-    if(index > -1) searchValueArray.splice(index, 1);
-
-    if(uceInArray && !ucfInArray && !tiInArray) {
-      searchFor.UCF = false;
-      searchFor.TI = false;
-    } else if(!uceInArray && ucfInArray && !tiInArray) {
-      searchFor.UCE = false;
-      searchFor.TI = false;
-    } else if(!uceInArray && !ucfInArray && tiInArray) {
-      searchFor.UCE = false;
-      searchFor.UCF = false;
-    } else if(uceInArray && ucfInArray && !tiInArray) {
-      searchFor.TI = false;
-    } else if(!uceInArray && ucfInArray && tiInArray) {
-      searchFor.UCE = false;
-    } else if(uceInArray && !ucfInArray && tiInArray) {
-      searchFor.UCF = false;
-    }
-
     searchValue = searchValueArray.join(" ");
 
     if(searchValue.length >= request.query.minLength) {
       // Call of the method 'searchForPAs', responsible for returning the protected areas that match the provided value
-      memberFilter.searchForPAs(searchValue, searchFor, function(err, result) {
+      memberFilter.searchForPAs(searchValue, function(err, result) {
         if(err) return console.error(err);
 
         // Array responsible for keeping the data obtained by the method 'searchForPAs'
@@ -77,11 +40,10 @@ var SearchForPAsController = function(app) {
         // Conversion of the result object to array
         result.rows.forEach(function(val) {
           data.push({
-            label: val.type + ' - ' + val.name,
+            label: val.name,
             value: {
               id: val.id,
-              name: val.name,
-              type: val.type
+              name: val.name
             }
           });
         });
