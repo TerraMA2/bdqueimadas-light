@@ -39,7 +39,7 @@ app.use(i18n.init);
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(BASE_URL, express.static(path.join(__dirname, 'public')));
 app.use(require('connect-flash')());
 
 app.use(function(req, res, next) {
