@@ -1043,3 +1043,13 @@ label { margin-bottom: 0px !important; }
   color: red;
   cursor: pointer;
 }
+
+#current-situation-btn {
+  background-image: url("../images/leftbar-icons/mini_icon_situacao_atual.png");
+  height: 44px !important;
+}
+
+#current-situation-btn:hover {
+  background-image: url("../images/leftbar-icons/mini_icon_situacao_atual_hover.png");
+  height: 44px !important;
+}
