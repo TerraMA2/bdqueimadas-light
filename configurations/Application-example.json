@@ -14,5 +14,6 @@
     "nextText": "Próximo",
     "prevText": "Anterior"
   },
-  "OGR2OGR": "ogr2ogr"
+  "OGR2OGR": "ogr2ogr",
+  "CurrentSituationUrl": ""
 }

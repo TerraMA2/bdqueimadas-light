@@ -37,6 +37,18 @@
           <span><%= __('Sobre') %></span>
         </a>
       </li>
+      <%
+      if(configurations.applicationConfigurations.CurrentSituationUrl !== "") {
+        %>
+        <li>
+          <a href="<%= configurations.applicationConfigurations.CurrentSituationUrl %>"  title="Situação Atual" target="_blank" id="current-situation-btn">
+            <div class="menu-btn-number">6</div>
+            <span><%= __('Situação Atual') %></span>
+          </a>
+        </li>
+        <%
+      }
+      %>
     </ul>
   </section>
 </aside>
