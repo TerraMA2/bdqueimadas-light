@@ -636,8 +636,8 @@ define(function() {
   var getStateIds = function(ids) {
     var idsArray = [];
 
-    idsArray.push(parseInt(ids.substr(0, 3)));
-    idsArray.push(parseInt(ids.substr(3, 4)));
+    idsArray.push(parseInt(ids.substr(0, 4)));
+    idsArray.push(parseInt(ids.substr(4, 4)));
 
     return idsArray;
   };
