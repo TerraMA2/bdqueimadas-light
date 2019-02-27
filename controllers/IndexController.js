@@ -8,7 +8,7 @@
  *
  * @property {object} memberPath - 'path' module.
  * @property {object} memberFs - 'fs' module.
- * @property {object} memberFs - 'fs' module.
+ * @property {object} memberFilter - Filter model.
  */
 var IndexController = function(app) {
 
