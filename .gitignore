@@ -11,3 +11,4 @@ public/docs
 node_modules
 npm-debug.log
 .vscode
+*.swp
